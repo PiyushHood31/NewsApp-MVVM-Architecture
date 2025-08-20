@@ -7,13 +7,68 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+   <!-- LinearLayout to hold all buttons -->
+   <LinearLayout
+       android:id="@+id/buttonContainer"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:orientation="vertical"
+       android:gravity="center"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintEnd_toEndOf="parent">
+
+      <Button
+          android:id="@+id/topHeadlines"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="6dp"
+          android:backgroundTint="#0D47A1"
+          android:gravity="center"
+          android:text="Top Headlines"
+          android:textColor="@color/white" />
+
+      <Button
+          android:id="@+id/newsSources"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="6dp"
+          android:backgroundTint="#0D47A1"
+          android:gravity="center"
+          android:text="News Sources"
+          android:textColor="@color/white" />
+
+      <Button
+          android:id="@+id/countries"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="6dp"
+          android:backgroundTint="#0D47A1"
+          android:gravity="center"
+          android:text="Countries"
+          android:textColor="@color/white" />
+
+      <Button
+          android:id="@+id/languages"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="6dp"
+          android:backgroundTint="#0D47A1"
+          android:gravity="center"
+          android:text="Languages"
+          android:textColor="@color/white" />
+
+      <Button
+          android:id="@+id/search"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="6dp"
+          android:backgroundTint="#0D47A1"
+          android:gravity="center"
+          android:text="Search"
+          android:textColor="@color/white" />
+
+   </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
