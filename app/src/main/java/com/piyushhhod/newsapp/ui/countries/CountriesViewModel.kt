@@ -21,11 +21,11 @@ class CountriesViewModel (private val countriesRepository: CountriesRepository) 
         fetchCountries()
     }
 
-    fun fetchCountries() {
+    private fun fetchCountries() {
         viewModelScope.launch {
             Log.d("CountryViewModel", "Started fetching countries...")
 
-            countriesRepository.getAllCountries(AppConstant.API_Key)
+            countriesRepository.getAllCountries(AppConstant.API_KEY)
                 .catch { e ->
                     Log.e("CountryViewModel", "Error fetching countries: ${e.message}", e)
                     _uiState.value = UiState.Error(e.toString())

@@ -1,5 +1,6 @@
 package com.piyushhhod.newsapp.ui.news_sources
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -14,7 +15,6 @@ import com.piyushhhod.newsapp.databinding.ActivityNewsSourceBinding
 import com.piyushhhod.newsapp.di.component.DaggerActivityComponent
 import com.piyushhhod.newsapp.di.module.ActivityModule
 import com.piyushhhod.newsapp.ui.base.UiState
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -25,7 +25,7 @@ class NewsSourceActivity : AppCompatActivity() {
     @Inject
     lateinit var adapter : NewsSourceAdapter
 
-    private val tag = "NewsSourceActivity"
+//    private val tag = "NewsSourceActivity"
     private lateinit var binding: ActivityNewsSourceBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,8 +70,9 @@ class NewsSourceActivity : AppCompatActivity() {
         }
     }
 
-    private fun renderList(soureceList : List<SourceX>){
-        adapter.addData(soureceList)
+    @SuppressLint("NotifyDataSetChanged")
+    private fun renderList(sourceList : List<SourceX>){
+        adapter.addData(sourceList)
         adapter.notifyDataSetChanged()
     }
 

@@ -2,7 +2,7 @@ package com.piyushhhod.newsapp.utils
 
 object AppConstant {
 
-    const val API_Key = "bfacafa0eda64e5abdcd287facde6ccf"
+    const val API_KEY = "bfacafa0eda64e5abdcd287facde6ccf"
     const val COUNTRY = "us"
 
     val countryCodeToNameMap = mapOf(
@@ -28,5 +28,23 @@ object AppConstant {
         "nl" to "Netherlands",
         "zh" to "China"
     )
+
+    val languageCodeToNameMap = mapOf(
+        "en" to "English",
+        "no" to "Norwegian",
+        "it" to "Italian",
+        "ar" to "Arabic",
+        "ud" to "Urdu",
+        "de" to "German",
+        "pt" to "Portuguese",
+        "es" to "Spanish",
+        "fr" to "French",
+        "he" to "Hebrew",
+        "ru" to "Russian",
+        "sv" to "Swedish",
+        "nl" to "Dutch",
+        "zh" to "Chinese"
+    )
+
 
 }

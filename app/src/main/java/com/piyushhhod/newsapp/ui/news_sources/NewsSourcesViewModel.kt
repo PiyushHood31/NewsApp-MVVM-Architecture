@@ -23,7 +23,7 @@ class NewsSourcesViewModel (private val newsSourcesRepository: SourcesRepository
 
     private fun fetchSources(){
         viewModelScope.launch {
-            newsSourcesRepository.getNewsSources(AppConstant.API_Key)
+            newsSourcesRepository.getNewsSources(AppConstant.API_KEY)
                 .catch { e->
                     _uiState.value = UiState.Error(e.toString())
                 }.collect{

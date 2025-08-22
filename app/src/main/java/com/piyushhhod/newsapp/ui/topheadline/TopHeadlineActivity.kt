@@ -1,5 +1,6 @@
 package com.piyushhhod.newsapp.ui.topheadline
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -16,7 +17,6 @@ import com.piyushhhod.newsapp.databinding.ActivityTopHeadlineBinding
 import com.piyushhhod.newsapp.di.component.DaggerActivityComponent
 import com.piyushhhod.newsapp.di.module.ActivityModule
 import com.piyushhhod.newsapp.ui.base.UiState
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -81,6 +81,7 @@ class TopHeadlineActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun renderList(articleList : List<Article>){
         adapter.addData(articleList)
         adapter.notifyDataSetChanged()
