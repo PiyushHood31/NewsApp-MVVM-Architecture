@@ -9,7 +9,9 @@ interface NetworkService {
 
     @GET("top-headlines")
     suspend fun getTopHeadlines(
-        @Query("country") country: String,
+        @Query("sources") sources: String?,
+        @Query("country") country: String?,
+        @Query("language") language: String?,
         @Query("apiKey") apiKey: String
     ): TopHeadlineResponse
 
@@ -17,5 +19,6 @@ interface NetworkService {
     suspend fun getSources(
         @Query("apiKey") apiKey: String
     ): NewsSourcesResponse
+
 
 }

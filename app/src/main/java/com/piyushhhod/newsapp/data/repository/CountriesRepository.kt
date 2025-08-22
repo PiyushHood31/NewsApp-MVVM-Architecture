@@ -20,7 +20,7 @@ class CountriesRepository @Inject constructor(private val networkService: Networ
             val countries = response.sources.map { it.country }.distinct()
             val mappedCountries = countries.map { code ->
                 countryCodeToNameMap[code.lowercase()] ?: code.uppercase()
-            }.sorted()
+            }.sorted().distinct()
             Log.d("CountryRepository", "Mapped countries: $mappedCountries")
             mappedCountries
 

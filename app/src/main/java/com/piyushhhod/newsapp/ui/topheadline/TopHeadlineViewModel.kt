@@ -12,22 +12,25 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
 
-class TopHeadlineViewModel (private val topHeadlineRepository: TopHeadlineRepository) : ViewModel() {
+class TopHeadlineViewModel(private val topHeadlineRepository: TopHeadlineRepository) : ViewModel() {
 
     private val _uiState = MutableStateFlow<UiState<List<Article>>>(UiState.Loading)
 
-    val uiState : StateFlow<UiState<List<Article>>> = _uiState
+    val uiState: StateFlow<UiState<List<Article>>> = _uiState
 
-    init{
-        fetchNews()
-    }
 
-    private fun fetchNews(){
+
+     fun fetchNews(language: String?, source: String?, country: String?) {
         viewModelScope.launch {
-            topHeadlineRepository.getTopHeadlines(AppConstant.COUNTRY , AppConstant.API_KEY)
-                .catch { e->
+            topHeadlineRepository.getTopHeadlines(
+                source = source,
+                language = language,
+                country = country,
+                apiKey = AppConstant.API_KEY
+            )
+                .catch { e ->
                     _uiState.value = UiState.Error(e.toString())
-                }.collect{
+                }.collect {
                     _uiState.value = UiState.Success(it)
                 }
         }

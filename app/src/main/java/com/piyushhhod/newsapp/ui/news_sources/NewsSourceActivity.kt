@@ -46,7 +46,7 @@ class NewsSourceActivity : AppCompatActivity() {
 
     private fun setupObserver() {
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
+            repeatOnLifecycle(Lifecycle.State.CREATED){
                 newsSourcesViewModel.uiState.collect{
                     when(it){
                         is UiState.Error -> {

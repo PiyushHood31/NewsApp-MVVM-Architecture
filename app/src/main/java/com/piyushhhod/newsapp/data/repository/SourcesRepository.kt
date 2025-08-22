@@ -13,7 +13,7 @@ class SourcesRepository @Inject constructor(private val networkService: NetworkS
         return flow{
             emit(networkService.getSources(apiKey = apiKey))
         }.map {
-            it.sources
+            it.sources.distinct()
         }
 
     }

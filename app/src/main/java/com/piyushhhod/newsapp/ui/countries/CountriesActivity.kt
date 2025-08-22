@@ -45,7 +45,7 @@ class CountriesActivity : AppCompatActivity() {
 
     private fun setObserver() {
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
+            repeatOnLifecycle(Lifecycle.State.CREATED){
                 countriesViewModel.uiState.collect{
                     when(it){
                         is UiState.Error -> {

@@ -18,7 +18,7 @@ class LanguageRepository @Inject constructor(private val networkService: Network
             val language = response.sources.map{it.language}.distinct()
             val languageName = language.map{code ->
                 AppConstant.languageCodeToNameMap[code.lowercase()] ?: code.uppercase()
-            }.sorted()
+            }.sorted().distinct()
             Log.d("LanguageRepository","Mapped Language : $languageName")
             languageName
 
