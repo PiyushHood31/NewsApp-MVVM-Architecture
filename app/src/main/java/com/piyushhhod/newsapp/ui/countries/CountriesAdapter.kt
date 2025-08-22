@@ -1,12 +1,10 @@
 package com.piyushhhod.newsapp.ui.countries
 
-import android.os.Parcel
-import android.os.Parcelable
+
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.piyushhhod.newsapp.data.model.SourceX
 import com.piyushhhod.newsapp.databinding.SourceItemLayoutBinding
 
 class CountriesAdapter(
@@ -17,7 +15,7 @@ class CountriesAdapter(
         fun bind(country: String) {
             binding.sourceItem.text = country
             itemView.setOnClickListener {
-                Log.d("CountriesAdapter", "Clicked on ${it}")
+                Log.d("CountriesAdapter", "Clicked on $it")
             }
         }
 

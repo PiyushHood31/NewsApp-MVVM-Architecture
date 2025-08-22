@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.piyushhhod.newsapp.databinding.ActivityMainBinding
 import com.piyushhhod.newsapp.ui.countries.CountriesActivity
+import com.piyushhhod.newsapp.ui.language.LanguagesActivity
 import com.piyushhhod.newsapp.ui.news_sources.NewsSourceActivity
 import com.piyushhhod.newsapp.ui.topheadline.TopHeadlineActivity
 
@@ -35,8 +36,14 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.countries.setOnClickListener {
-            Log.d(tag, "Countries Actiivity is Getting Started")
+            Log.d(tag, "Countries Activity is Getting Started")
             val intent = Intent(this@MainActivity, CountriesActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.languages.setOnClickListener {
+            Log.d(tag,"Languages Activity is Getting Started")
+            val intent = Intent(this@MainActivity , LanguagesActivity::class.java)
             startActivity(intent)
         }
     }

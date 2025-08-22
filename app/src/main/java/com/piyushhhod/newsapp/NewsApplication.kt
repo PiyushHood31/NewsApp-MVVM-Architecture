@@ -4,7 +4,7 @@ import android.app.Application
 import com.piyushhhod.newsapp.di.component.ApplicationComponent
 import com.piyushhhod.newsapp.di.component.DaggerApplicationComponent
 import com.piyushhhod.newsapp.di.module.ApplicationModule
-import dagger.internal.DaggerGenerated
+
 
 class NewsApplication : Application() {
 

@@ -1,4 +1,4 @@
-package com.piyushhhod.newsapp.ui.countries
+package com.piyushhhod.newsapp.ui.language
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -10,57 +10,62 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.piyushhhod.newsapp.NewsApplication
-import com.piyushhhod.newsapp.databinding.ActivityCountriesBinding
+import com.piyushhhod.newsapp.databinding.ActivityLanguagesBinding
 import com.piyushhhod.newsapp.di.component.DaggerActivityComponent
 import com.piyushhhod.newsapp.di.module.ActivityModule
 import com.piyushhhod.newsapp.ui.base.UiState
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class CountriesActivity : AppCompatActivity() {
+class LanguagesActivity : AppCompatActivity() {
+    @Inject
+    lateinit var languageViewModel: LanguageViewModel
 
     @Inject
-    lateinit var countriesViewModel: CountriesViewModel
+    lateinit var adapter: LanguageAdapter
 
-    @Inject
-    lateinit var adapter :CountriesAdapter
+    private lateinit var binding: ActivityLanguagesBinding
 
-//    private val tag = "CountriesActivity"
-    private lateinit var binding : ActivityCountriesBinding
+    //    private  val TAG ="LanguageActivity"
     override fun onCreate(savedInstanceState: Bundle?) {
         injectDependencies()
         super.onCreate(savedInstanceState)
-        binding = ActivityCountriesBinding.inflate(layoutInflater)
+        binding = ActivityLanguagesBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setUI()
-        setObserver()
+        setUi()
+        setupObserver()
+
 
     }
 
-    private fun setUI() {
-        val recyclerView = binding.countriesRecyclerView
+    private fun setUi() {
+        val recyclerView = binding.languagesRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
     }
 
-    private fun setObserver() {
+    private fun setupObserver() {
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
-                countriesViewModel.uiState.collect{
-                    when(it){
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                languageViewModel.uiState.collect {
+                    when (it) {
                         is UiState.Error -> {
-                            binding.countriesProgessBar.visibility = View.GONE
-                            Toast.makeText(this@CountriesActivity,it.message , Toast.LENGTH_LONG)
+                            binding.languagesProgessBar.visibility = View.GONE
+                            binding.languagesRecyclerView.visibility = View.GONE
+                            Toast.makeText(this@LanguagesActivity, it.message, Toast.LENGTH_LONG)
                                 .show()
                         }
+
                         UiState.Loading -> {
-                            binding.countriesProgessBar.visibility = View.VISIBLE
-                            binding.countriesRecyclerView.visibility = View.GONE
+                            binding.languagesRecyclerView.visibility = View.GONE
+                            binding.languagesProgessBar.visibility = View.VISIBLE
                         }
+
                         is UiState.Success -> {
                             renderList(it.data)
-                            binding.countriesRecyclerView.visibility = View.VISIBLE
-                            binding.countriesProgessBar.visibility = View.GONE
+                            binding.languagesRecyclerView.visibility = View.VISIBLE
+                            binding.languagesProgessBar.visibility = View.GONE
+
                         }
                     }
                 }
@@ -70,7 +75,7 @@ class CountriesActivity : AppCompatActivity() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun renderList(list: List<String>) {
-        adapter.addData(list)
+        adapter.addItem(list)
         adapter.notifyDataSetChanged()
     }
 
@@ -80,5 +85,6 @@ class CountriesActivity : AppCompatActivity() {
             .activityModule(ActivityModule(this))
             .build()
             .inject(this)
+
     }
 }

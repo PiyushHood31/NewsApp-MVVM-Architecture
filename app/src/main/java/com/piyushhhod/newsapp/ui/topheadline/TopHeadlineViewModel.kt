@@ -24,7 +24,7 @@ class TopHeadlineViewModel (private val topHeadlineRepository: TopHeadlineReposi
 
     private fun fetchNews(){
         viewModelScope.launch {
-            topHeadlineRepository.getTopHeadlines(AppConstant.COUNTRY , AppConstant.API_Key)
+            topHeadlineRepository.getTopHeadlines(AppConstant.COUNTRY , AppConstant.API_KEY)
                 .catch { e->
                     _uiState.value = UiState.Error(e.toString())
                 }.collect{

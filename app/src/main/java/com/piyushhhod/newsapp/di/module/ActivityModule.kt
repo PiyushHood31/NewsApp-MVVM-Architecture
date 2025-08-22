@@ -3,22 +3,22 @@ package com.piyushhhod.newsapp.di.module
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewmodel.viewModelFactory
 import com.piyushhhod.newsapp.data.repository.CountriesRepository
+import com.piyushhhod.newsapp.data.repository.LanguageRepository
 import com.piyushhhod.newsapp.data.repository.SourcesRepository
 import com.piyushhhod.newsapp.data.repository.TopHeadlineRepository
 import com.piyushhhod.newsapp.di.ActivityContext
-import com.piyushhhod.newsapp.di.ActivityScope
 import com.piyushhhod.newsapp.ui.base.ViewModelProviderFactory
 import com.piyushhhod.newsapp.ui.countries.CountriesAdapter
 import com.piyushhhod.newsapp.ui.countries.CountriesViewModel
+import com.piyushhhod.newsapp.ui.language.LanguageAdapter
+import com.piyushhhod.newsapp.ui.language.LanguageViewModel
 import com.piyushhhod.newsapp.ui.news_sources.NewsSourceAdapter
 import com.piyushhhod.newsapp.ui.news_sources.NewsSourcesViewModel
 import com.piyushhhod.newsapp.ui.topheadline.TopHeadlineAdapter
 import com.piyushhhod.newsapp.ui.topheadline.TopHeadlineViewModel
 import dagger.Module
 import dagger.Provides
-import org.intellij.lang.annotations.PrintFormat
 
 @Module
 class ActivityModule (private val activity: AppCompatActivity){
@@ -54,6 +54,14 @@ class ActivityModule (private val activity: AppCompatActivity){
     }
 
     @Provides
+    fun provideLanguageViewModel(languageRepository: LanguageRepository) : LanguageViewModel{
+        return  ViewModelProvider(activity,
+            ViewModelProviderFactory(LanguageViewModel::class){
+                LanguageViewModel(languageRepository)
+            })[LanguageViewModel::class.java]
+    }
+
+    @Provides
     fun provideTopHeadlineAdapter() = TopHeadlineAdapter(ArrayList())
 
     @Provides
@@ -61,4 +69,7 @@ class ActivityModule (private val activity: AppCompatActivity){
 
     @Provides
     fun provideCountriesAdapter() = CountriesAdapter(ArrayList())
+
+    @Provides
+    fun provideLanguageAdapter() = LanguageAdapter(ArrayList())
 }
