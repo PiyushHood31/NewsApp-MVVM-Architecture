@@ -17,6 +17,7 @@ import com.piyushhhod.newsapp.databinding.ActivityTopHeadlineBinding
 import com.piyushhhod.newsapp.di.component.DaggerActivityComponent
 import com.piyushhhod.newsapp.di.module.ActivityModule
 import com.piyushhhod.newsapp.ui.base.UiState
+import com.piyushhhod.newsapp.utils.AppConstant
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -38,8 +39,23 @@ class TopHeadlineActivity : AppCompatActivity() {
         setContentView(binding.root)
         setUI()
         setupObserver()
+        handleIntentAndFetchNews()
         Log.i(tag,"TopHeadlineActivity is started")
 
+    }
+
+    private fun handleIntentAndFetchNews() {
+        val country = intent.getStringExtra("country_name")
+        val language = intent.getStringExtra("language_name")
+        val source = intent.getStringExtra("source_name")
+
+        Log.d(tag, "Received country=$country, language=$language, source=$source")
+
+        if(country!= null || language != null || source != null){
+            topHeadlineViewModel.fetchNews(language, source, country)
+        }else{
+            topHeadlineViewModel.fetchNews(null,null,AppConstant.COUNTRY)
+        }
     }
 
     private fun setUI(){
@@ -54,25 +70,38 @@ class TopHeadlineActivity : AppCompatActivity() {
 
         recyclerView.adapter = adapter
 
+        binding.backBtn.setOnClickListener {
+            onBackPressed()
+        }
+
     }
 
     private fun setupObserver() {
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
+            repeatOnLifecycle(Lifecycle.State.CREATED){
                 topHeadlineViewModel.uiState.collect{
                     when(it){
                         is UiState.Error -> {
-                            binding.topHeadlinePBar.visibility = View.VISIBLE
+                            binding.topHeadlinesProgessBar.visibility = View.GONE
+                            binding.infoTextView.text = "Unexpected Error Occur...!! :#"
+                            binding.infoTextView.visibility = View.VISIBLE
+                            binding.backBtn.visibility = View.VISIBLE
                             Toast.makeText(this@TopHeadlineActivity , it.message , Toast.LENGTH_LONG)
                                 .show()
                         }
                         UiState.Loading -> {
-                            binding.topHeadlinePBar.visibility = View.VISIBLE
+                            binding.topHeadlinesProgessBar.visibility = View.VISIBLE
                             binding.topHeadlinesRecyclerView.visibility = View.GONE
                         }
                         is UiState.Success -> {
-                            binding.topHeadlinePBar.visibility = View.GONE
-                            renderList(it.data)
+                            binding.topHeadlinesProgessBar.visibility = View.GONE
+                            if(it.data.size > 0) {
+                                renderList(it.data)
+                            }else{
+                                binding.infoTextView.text = "The List is Empty...!! :("
+                                binding.infoTextView.visibility = View.VISIBLE
+                                binding.backBtn.visibility = View.VISIBLE
+                            }
                             binding.topHeadlinesRecyclerView.visibility= View.VISIBLE
                         }
                     }
