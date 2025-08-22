@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.piyushhhod.newsapp">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".NewsApplication"
@@ -16,6 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NewsApp"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.news_sources.NewsSourceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.topheadline.TopHeadlineActivity"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

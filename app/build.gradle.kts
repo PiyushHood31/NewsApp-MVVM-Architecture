@@ -1,7 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    alias(libs.plugins.devtools.ksp)
+    alias(libs.plugins.kotlin.kapt)
+
 }
 
 android {
@@ -58,7 +59,10 @@ dependencies {
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.dagger)
-    ksp(libs.dagger.compiler)
+//    ksp(libs.dagger.compiler)
+    kapt(libs.dagger.compiler)
     implementation(libs.browser)
     androidTestImplementation(libs.junit.test.ext)
+    implementation(libs.okhttp.logging)
+
 }
