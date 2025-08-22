@@ -8,6 +8,7 @@ import com.piyushhhod.newsapp.databinding.ActivityMainBinding
 import com.piyushhhod.newsapp.ui.countries.CountriesActivity
 import com.piyushhhod.newsapp.ui.language.LanguagesActivity
 import com.piyushhhod.newsapp.ui.news_sources.NewsSourceActivity
+import com.piyushhhod.newsapp.ui.search.SearchActivity
 import com.piyushhhod.newsapp.ui.topheadline.TopHeadlineActivity
 
 class MainActivity : AppCompatActivity() {
@@ -44,6 +45,12 @@ class MainActivity : AppCompatActivity() {
         binding.languages.setOnClickListener {
             Log.d(tag,"Languages Activity is Getting Started")
             val intent = Intent(this@MainActivity , LanguagesActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.search.setOnClickListener {
+            Log.d(tag,"Search Activity is Getting Started")
+            val intent = Intent(this@MainActivity , SearchActivity::class.java)
             startActivity(intent)
         }
     }

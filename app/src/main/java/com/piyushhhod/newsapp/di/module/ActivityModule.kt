@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.piyushhhod.newsapp.data.repository.CountriesRepository
 import com.piyushhhod.newsapp.data.repository.LanguageRepository
+import com.piyushhhod.newsapp.data.repository.SearchRepository
 import com.piyushhhod.newsapp.data.repository.SourcesRepository
 import com.piyushhhod.newsapp.data.repository.TopHeadlineRepository
 import com.piyushhhod.newsapp.di.ActivityContext
@@ -15,6 +16,7 @@ import com.piyushhhod.newsapp.ui.language.LanguageAdapter
 import com.piyushhhod.newsapp.ui.language.LanguageViewModel
 import com.piyushhhod.newsapp.ui.news_sources.NewsSourceAdapter
 import com.piyushhhod.newsapp.ui.news_sources.NewsSourcesViewModel
+import com.piyushhhod.newsapp.ui.search.SearchViewModel
 import com.piyushhhod.newsapp.ui.topheadline.TopHeadlineAdapter
 import com.piyushhhod.newsapp.ui.topheadline.TopHeadlineViewModel
 import dagger.Module
@@ -59,6 +61,14 @@ class ActivityModule (private val activity: AppCompatActivity){
             ViewModelProviderFactory(LanguageViewModel::class){
                 LanguageViewModel(languageRepository)
             })[LanguageViewModel::class.java]
+    }
+
+    @Provides
+    fun provideSearchViewModel(searchRepository: SearchRepository):SearchViewModel{
+        return ViewModelProvider(activity,
+            ViewModelProviderFactory(SearchViewModel::class){
+                SearchViewModel(searchRepository)
+            })[SearchViewModel::class.java]
     }
 
     @Provides

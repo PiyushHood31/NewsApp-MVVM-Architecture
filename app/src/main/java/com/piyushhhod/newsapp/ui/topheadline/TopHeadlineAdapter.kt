@@ -50,4 +50,8 @@ class TopHeadlineAdapter(
     fun addData(list : List<Article>){
         articleList.addAll(list)
     }
+
+    fun clearData() {
+        articleList.clear()  // Or whatever your internal list is called
+    }
 }

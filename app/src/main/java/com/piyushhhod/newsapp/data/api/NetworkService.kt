@@ -20,5 +20,11 @@ interface NetworkService {
         @Query("apiKey") apiKey: String
     ): NewsSourcesResponse
 
+    @GET("everything")
+    suspend fun getEveryThing(
+        @Query("q") q: String,
+        @Query("apiKey") apiKey: String
+    ): TopHeadlineResponse
+
 
 }
