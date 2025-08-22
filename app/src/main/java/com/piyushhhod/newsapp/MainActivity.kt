@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.piyushhhod.newsapp.databinding.ActivityMainBinding
+import com.piyushhhod.newsapp.ui.countries.CountriesActivity
 import com.piyushhhod.newsapp.ui.news_sources.NewsSourceActivity
 import com.piyushhhod.newsapp.ui.topheadline.TopHeadlineActivity
 
@@ -22,14 +23,20 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupUI() {
         binding.topHeadlines.setOnClickListener {
-            Log.i(tag , "TopHeadlineActivity is getting started")
-            val intent = Intent(this@MainActivity , TopHeadlineActivity::class.java)
+            Log.i(tag, "TopHeadlineActivity is getting started")
+            val intent = Intent(this@MainActivity, TopHeadlineActivity::class.java)
             startActivity(intent)
         }
 
         binding.newsSources.setOnClickListener {
-            Log.d(tag , "NewsSources Activity is getting started")
-            val intent = Intent(this@MainActivity , NewsSourceActivity::class.java)
+            Log.d(tag, "NewsSources Activity is getting started")
+            val intent = Intent(this@MainActivity, NewsSourceActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.countries.setOnClickListener {
+            Log.d(tag, "Countries Actiivity is Getting Started")
+            val intent = Intent(this@MainActivity, CountriesActivity::class.java)
             startActivity(intent)
         }
     }
